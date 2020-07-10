@@ -84,6 +84,7 @@ def locate_network_pkl(result_dir, run_id_or_run_dir_or_network_pkl, snapshot_or
     raise IOError('Cannot locate network pkl for snapshot', snapshot_or_network_pkl)
 
 def open_file_or_url(file_or_url):
+    file_or_url = get_path_or_url(file_or_url)
     if dnnlib.util.is_url(file_or_url):
         return dnnlib.util.open_url(file_or_url, cache_dir='.stylegan2-cache')
     return open(file_or_url, 'rb')

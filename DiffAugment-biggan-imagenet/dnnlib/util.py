@@ -23,6 +23,7 @@ import html
 import hashlib
 import glob
 import uuid
+import zipfile
 
 from distutils.util import strtobool
 from typing import Any, List, Tuple, Union
@@ -413,6 +414,15 @@ def open_url(url: str, cache_dir: str = None, num_attempts: int = 10, verbose: b
 
     # Return data as file object.
     return io.BytesIO(url_data)
+
+
+def unzip_from_url(file_or_url, cache_dir='.cache'):
+    file_or_url = get_path_or_url(file_or_url)
+    if is_url(file_or_url):
+        with zipfile.ZipFile(open_url(file_or_url + '.zip', cache_dir=cache_dir, return_path=True), 'r') as f:
+            file_or_url = os.path.join(cache_dir, os.path.basename(file_or_url))
+            f.extractall(file_or_url)
+    return file_or_url
 
 
 def open_file_or_url(file_or_url):

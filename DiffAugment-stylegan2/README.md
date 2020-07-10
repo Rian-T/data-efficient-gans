@@ -3,13 +3,11 @@
 This repo is implemented upon and has the same dependencies as the official [StyleGAN2 repo](https://github.com/NVlabs/stylegan2). Specifically,
 
 - TensorFlow 1.14 or 1.15 with GPU support.
-- `tensorflow-datasets` should be installed to run on CIFAR, e.g., `pip install tensorflow-datasets`.
+- `tensorflow-datasets` version <= 2.1.0 should be installed to run on CIFAR, e.g., `pip install tensorflow-datasets==2.1.0`.
 - We recommend using 4 or 8 GPUs with at least 12 GB of DRAM for training.
 - If you are facing problems with `nvcc` (when building custom ops of StyleGAN2), this can be circumvented by specifying `--impl=ref` in training at the cost of a slightly longer training time.
 
 ## Pre-Trained Models and Evaluation
-
-### CIFAR-10 and CIFAR-100
 
 To evaluate a model on CIFAR-10 or CIFAR-100, run the following command:
 
@@ -35,8 +33,6 @@ Here, `WHICH_DATASET` specifies either `cifar10` or `cifar100` (default to `cifa
 | `mit-han-lab:DiffAugment-stylegan2-cifar100-0.1.pkl` | `cifar100` (10% data) | **9.06** | **20.75** |
 
 The evaluation results of the pre-trained models should be close to these numbers. Specify `--num-repeats=REPEATS` to compute means and standard deviations over multiple evaluation runs. A standard deviation of less than 1% relatively is expected.
-
-### Few-Shot Generation
 
 To evaluate a model on a few-shot dataset, run the following command:
 
@@ -96,4 +92,7 @@ python run_few_shot.py --dataset=WHICH_DATASET --num-gpus=NUM_GPUS --DiffAugment
 
 ### Preparing Your Own Datasets
 
-Our method can generate good results using a small number of samples, e.g., 100 images. You may create a new dataset at such scale easily, but note that the generated results may be sensitive to the quality of the training samples. You may wish to crop the raw images and discard some bad training samples. After putting all images into a single folder, pass it to `WHICH_DATASET`, the images will be resized to the specified resolution if necessary, and then enjoy the outputs! You may increase the training length (default to 300k images) for larger datasets; note that there may be overfitting issues if the training is too long.
+Our method can generate good results using a small number of samples, e.g., 100 images. You may create a new dataset at such scale easily, but note that the generated results may be sensitive to the quality of the training samples. You may wish to crop the raw images and discard some bad training samples. After putting all images into a single folder, pass it to `WHICH_DATASET`, the images will be resized to the specified resolution if necessary, and then enjoy the outputs! Note that,
+
+- The training length (default to 300k images) may be increased for larger datasets; note that there may be overfitting issues if the training is too long.
+- The cached files will be stored in the same folder with the training images. If the training images in your folder is *changed* after some run, please manually clean the cached files, `*.tfrecords` and `*.pkl`, from your image folder before rerun.
