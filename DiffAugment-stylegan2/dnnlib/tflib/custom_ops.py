@@ -28,6 +28,7 @@ compiler_bindir_search_path = [
     'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.14.26428/bin/Hostx64/x64',
     'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64',
     'C:/Program Files (x86)/Microsoft Visual Studio 14.0/vc/bin',
+    'D:\\Visual Studio\\VC\\Tools\\MSVC\\14.26.28801\\bin\\Hostx64\\x64',
 ]
 
 #----------------------------------------------------------------------------

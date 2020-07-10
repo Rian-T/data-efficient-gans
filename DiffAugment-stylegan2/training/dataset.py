@@ -25,7 +25,7 @@ class TFRecordDataset:
                  split='train',  # Dataset split, 'train' or 'test'
                  from_tfrecords=False,    # Load from tfrecords or from tensorflow datasets
                  tfds_data_dir=None,     # Directory from which tensorflow datasets load
-                 resolution=None,     # Dataset resolution, None = autodetect.
+                 resolution=256,     # Dataset resolution, None = autodetect.
                  label_file=None,     # Relative path of the labels file, None = autodetect.
                  max_label_size=0,        # 0 = no labels, 'full' = full labels, <int> = N first label components.
                  num_samples=None,     # Maximum number of images to use, None = use all images.
@@ -37,7 +37,7 @@ class TFRecordDataset:
                  num_threads=2):       # Number of concurrent threads.
 
         self.tfrecord_dir = tfrecord_dir
-        self.resolution = None
+        self.resolution = 256
         self.shape = []        # [channels, height, width]
         self.dtype = 'uint8'
         self.dynamic_range = [0, 255]
